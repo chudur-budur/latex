@@ -24,8 +24,8 @@
 \RequirePackage{amsfonts}
 \RequirePackage{amssymb}
 \RequirePackage{amsxtra}
-\RequirePackage{mathtools}
 \RequirePackage{physics}
+% \RequirePackage{mathtools} % this conflicts with amsmath, not sure how to fix
 \RequirePackage{tikz}
 \usetikzlibrary{automata,positioning,arrows}
 
@@ -76,12 +76,6 @@
 \newcommand{\ub}[1]{\underbrace{#1}}
 \newcommand{\degree}{^{\circ}}
 \newcommand{\eps}{\epsilon}
-\newcommand{\veps}{\varepsilon}
-\newcommand{\bv}[1]{\mathbf{#1}}
-\newcommand{\jac}{\mathbf{J}}
-\newcommand{\Del}{\Delta}
-\newcommand{\pdel}[1]{\partial{#1}}
-\newcommand{\pdelf}[2]{\frac{\partial{#1}}{\partial{#2}}}
 
 %\newcommand{\multi}[2]{\left(\!\binom{#1}{#2}\!\right)}
 %\newcommand{\multi}[2] { \genfrac {(} {)} {0em} {} {#1} {#2} }
@@ -97,6 +91,14 @@
 \tikzset{square arrow/.style={%
 	to path={-- ++(0,-.25)  -| (\tikztotarget) \tikztonodes},below,pos=.25}}
 \newenvironment{tinymat}{\left(\begin{smallmatrix}}{\end{smallmatrix}\right)}
+ 
+% more symbols
+\newcommand{\veps}{\varepsilon}
+\newcommand{\bv}[1]{\mathbf{#1}}
+\newcommand{\jac}{\mathbf{J}}
+\newcommand{\Del}{\Delta}
+\newcommand{\pdel}[1]{\partial{#1}}
+\newcommand{\pdelf}[2]{\frac{\partial{#1}}{\partial{#2}}}
 
 %%% For commenting
 %%% \aside{text}
