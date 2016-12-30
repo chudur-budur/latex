@@ -1,35 +1,108 @@
-% Some custom macros for latex typesetting.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{rumath}[1996/09/03]
+
+% rumath 1.1
+% Some custom macros for latex typesetting. Provides different non-standard 
+% mathematical symbols. Example: q-analogues, sterling partition numbers, 
+% multi-choose numebrs etc.
 %
-% M. Shamsul Alam
-% The Department of Mathematics 
-% Rajshahi University, Kazla - 6205
-% Rajshahi, Bangladesh.
+% Created by:
+% 	M. Shamsul Alam
+% 	The Department of Mathematics 
+% 	Rajshahi University, Kazla - 6205
+% 	Rajshahi, Bangladesh.
 % 
-% 
-% Dr. M. Sayedur Rahman
-% The Department of Statistics
-% Rajshahi University, Kazla - 6205
-% Rajshahi, Bangladesh.
+% 	Dr. M. Sayedur Rahman
+% 	The Department of Statistics
+% 	Rajshahi University, Kazla - 6205
+% 	Rajshahi, Bangladesh.
 %
 % Lastest Update: 01-07-1997
- 
-
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{rumathmacros}[1996/09/03]
 
 %%% Some packages we need to use
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+\RequirePackage{amsxtra}
+\RequirePackage{mathtools}
+\RequirePackage{physics}
+\RequirePackage{tikz}
+\usetikzlibrary{automata,positioning,arrows}
+
+%% these are taken from sean-luke's style file by khaled
 \RequirePackage{color}
 \RequirePackage{ifthen}
 \RequirePackage{epsfig}
 \RequirePackage{calc}
-\RequirePackage{amssymb}
-\RequirePackage{amsxtra}
 \RequirePackage[normalem]{ulem}
+
+%%% Some extra math symbols, some of them might be 
+%%% available in different style files.
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\I}{\mathcal{I}}
+\renewcommand{\L}{\mathcal{L}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\O}{\mathcal{O}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\Q}{\mathcal{Q}}
+\newcommand{\QQ}{\mathcal{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RR}{\mathcal{R}}
+\renewcommand{\S}{\mathcal{S}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\Flag}{\mathrm{Flag}}
+\newcommand{\Gr}{\mathrm{Gr}}
+\newcommand{\Flat}{\mathrm{Flat}}
+\newcommand{\lam}{\lambda}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\divides}{\mid}
+\newcommand{\notdivides}{\nmid}
+\newcommand{\st}{\;\ifnum\currentgrouptype=16 \middle\fi|\;}
+\newcommand{\egf}[1]{\tilde{#1}}
+\newcommand{\nn}{\nonumber}
+\newcommand{\impl}{\Rightarrow\,\,}
+\newcommand{\scap}[1]{\text{\sc {#1}}}
+\newcommand{\ub}[1]{\underbrace{#1}}
+\newcommand{\degree}{^{\circ}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\veps}{\varepsilon}
+
+%\newcommand{\multi}[2]{\left(\!\binom{#1}{#2}\!\right)}
+%\newcommand{\multi}[2] { \genfrac {(} {)} {0em} {} {#1} {#2} }
+\newcommand{\multi}[2]{\left(\!\left(\!\genfrac{}{}{0pt}{}{#1}{#2}\!\right)\!\right)}
+\newcommand{\stirling}[2]{\left\{\genfrac{}{}{0pt}{}{#1}{#2}\right\}}
+\newcommand{\cycle}[2]{\genfrac{[}{]}{0pt}{}{#1}{#2}}
+\newcommand{\qcycle}[2]{\left[\!\genfrac{[}{]}{0pt}{}{#1}{#2}\!\right]_{q}}
+\newcommand{\qperm}[1]{[[#1]]^{!}_{q}}
+\newcommand{\qfac}[1]{[#1]^{!}_{q}}
+\newcommand{\qval}[1]{[#1]_{q}}
+\newcommand{\form}[1]{[\![#1]\!]}
+\newcommand{\mathnode}[1]{\tikz[overlay,remember picture] \node (#1) {};}
+\tikzset{square arrow/.style={%
+	to path={-- ++(0,-.25)  -| (\tikztotarget) \tikztonodes},below,pos=.25}}
+\newenvironment{tinymat}{\left(\begin{smallmatrix}}{\end{smallmatrix}\right)}
+
+%%% For commenting
+%%% \aside{text}
+%%%	Turns on display of aside -- this is like \co except that it ALWAYS appears in red
+%%%	regardless of the value of showchanges
+\newcommand{\aside}[1]{\textbf{\color{red}{[#1]}}}
+\newcommand{\mycomment}[1]{\textcolor{darkgreen}{#1}}
 
 % Smileys.
 % Usage example: happy {\happy}, sad {\sad}, annoyed {\annoyed}
 % Note the commands are surrounded in { ... }
-
 \newcommand\sad{\(\bigcirc\hspace{-0.82em}_{\smash{\stackrel{}{\stackrel{\hspace{0.02em}.\hspace{0.1em}.}{\hspace{0.004em}\smallfrown}}}}\hspace{0.15em}\)}
 \newcommand\happy{\(\bigcirc\hspace{-0.815em}_{\smash{\stackrel{}{\stackrel{\hspace{0.04em}.\hspace{0.1em}.}{\hspace{0.007em}\smallsmile}}}}\hspace{0.15em}\)}
 \newcommand\annoyed{\(\bigcirc\hspace{-0.81em}_{\smash{\stackrel{}{\stackrel{\hspace{0.04em}.\hspace{0.1em}.}{\hspace{0.007em}-}}}}\hspace{0.15em}\)}
@@ -179,11 +252,3 @@
 			{\mbox{\(\mid\prec\)}{\color{red}{\sout{#2}}}\mbox{\(\triangleright\triangleright\)}{\color{purple}#3}\mbox{\(\succ\mid\)}}
 			{{\color{red}{\sout{#2}}}{\color{purple}#3}}}
 		{#3}}
-	
-		
-%%% \aside{text}
-%%%	Turns on display of aside -- this is like \co except that it ALWAYS appears in red
-%%%	regardless of the value of showchanges
-\newcommand{\aside}[1]{\textbf{\color{red}{[#1]}}}
-\newcommand{\mycomment}[1]{\textcolor{darkgreen}{#1}}
-
